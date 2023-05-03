@@ -478,21 +478,22 @@ def updateItem(request):
 	orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
 
 	if action == 'add':
-		orderItem.quantity = (orderItem.quantity + 1)
+		if (product.quantity > orderItem.quantity): orderItem.quantity = (orderItem.quantity + 1);product.quantity = (product.quantity - 1)
 	elif action == 'remove':
-		orderItem.quantity = (orderItem.quantity - 1)
+		orderItem.quantity = (orderItem.quantity - 1);product.quantity = (product.quantity + 1)
 
 	orderItem.save()
 
 	if orderItem.quantity <= 0:
 		orderItem.delete()
+    
+
 
 	return JsonResponse('Item was added', safe=False)
 	
 def processorder(request):
 	transaction_id = datetime.datetime.now().timestamp()
 	data = json.loads(request.body)
-
 	if request.user.is_authenticated:
 		customer = request.user
 		order, created = Order.objects.get_or_create(customer=customer, complete=False)
@@ -500,10 +501,10 @@ def processorder(request):
 		print('User Not logged In')
 
 	total = float(data['form']['total'])
-	order.transaction_id = transaction_id
+	order.transaction_id = transaction_id;
 
 	if total == order.get_cart_total:
-		order.complete = True
+		order.complete = True;
 	order.save()
 
 	if order.shipping == True:
@@ -515,6 +516,8 @@ def processorder(request):
 		state=data['shipping']['state'],
 		zipcode=data['shipping']['zipcode'],
 		)
+                
+    
 
 	return JsonResponse('Payment submitted..', safe=False)
 
@@ -579,3 +582,4 @@ def products_detail(request, product_id):
         # 'comment_form':CommentForm(),
         'title':'Inventory'
     })
+

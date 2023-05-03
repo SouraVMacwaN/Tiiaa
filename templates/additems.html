@@ -8,15 +8,14 @@
 
 {% if success %}
 <div id="success-alert" class="alert alert-success" role="alert">
-    New Item Added in Inventory created successfully.
+    Item Added in Inventory Successfully.
 </div>
 {% else %}
 
     <div class="card" >
         <h5 class="card-header">Add New Item in Inventory</h5>
-        
         <div class="card-body">
-            
+
             <form action="{% url 'additems' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="form-group">

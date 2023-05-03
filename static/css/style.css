@@ -265,7 +265,7 @@ a.download {
 a.article,
 a.article:hover {
     background: #6D9886 !important;
-    color: grey !important;
+    color: rgb(80, 76, 76) !important;
 }
 
 /* ---------------------------------------------------
@@ -413,6 +413,7 @@ a.article:hover {
     height: 250;
     object-fit: cover;
 }
+
 
 /* ---------------------------------------------------
     MEDIAQUERIES

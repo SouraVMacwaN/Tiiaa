@@ -43,7 +43,7 @@
 			<br>
 			<div class="box-element hidden" id="payment-info">
 				<small>Paypal Options</small>
-				<!-- <button id="make-payment">Make payment</button> -->
+				<!--<button id="make-payment">Make payment</button>-->
 				<div id="paypal-button-container"></div>
 			</div>
 			
@@ -69,28 +69,9 @@
 		</div>
 	</div>
 
-	<!-- PayPal -->
-
 	<script src="https://www.paypal.com/sdk/js?client-id=AU3re9BZdx1G8mjVVd0UfNChwZID5J4W5l0FxO-FCSEf-AydYZNid6l-WTaXp-wVzdrLTWL2MCqfjBbP&currency=USD"></script>
-	
+
 	<script>
-
-		// Snackbar func
-		function showSnackbar() {
-			// Get the snackbar element
-			var x = document.getElementById("snackbar");
-			
-			// Add the "show" class to the snackbar
-			x.classList.remove('hidden-snackbar');
-			x.classList.add("show-snackbar");
-
-			// After 3 seconds, remove the show class from the snackbar
-			setTimeout(function(){ 
-				x.classList.remove('show-snackbar'); 
-				x.classList.add('hidden-snackbar');
-			}, 3000);
-		}
-
 		var total = '{{order.get_cart_total}}'
         // Render the PayPal button into #paypal-button-container
         paypal.Buttons({
@@ -115,7 +96,6 @@
             onApprove: function(data, actions) {
                 return actions.order.capture().then(function(details) {
                     // Show a success message to the buyer
-						  showSnackbar()
                     submitFormData()
                 });
             }
@@ -124,10 +104,8 @@
     </script>
 
 	<script type="text/javascript">
-		
-
 		var shipping = '{{order.shipping}}'
-		var total = '{{order.get_cart_total}}'
+
 		if (shipping == 'False'){
 		 	document.getElementById('shipping-info').innerHTML = ''
 		}
@@ -155,7 +133,7 @@
 	    document.getElementById('make-payment').addEventListener('click', function(e){
 	    	submitFormData()
 	    })
-*/
+	    */
 
 	    function submitFormData(){
 	    	console.log('Payment button clicked')
@@ -211,18 +189,6 @@
 				})
 	    }
 	</script>
-
-	<!-- The snackbar -->
-	<div id="snackbar" class="hidden-snackbar">
-		<img class="snackbar-image" src="{% static 'images/check.png' %}">
-		Transaction complete
-	</div>
-	
-	<!-- Include the required Bootstrap and JavaScript files -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 {% endblock content %}
 
 

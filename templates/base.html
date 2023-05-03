@@ -209,10 +209,26 @@ var csrftoken = getToken('csrftoken')
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Messages</a>
                             </li>
-                            {% if user.is_authenticated %}
+
+
+                            {% if user.is_authenticated and not user.is_farmer %}
+                            <li class="nav-item">
+                                <img src="{% static 'images/cart.png' %}" alt="Login Icon" class="login-icon" style="width: 25px; height: 30px;margin-top: 5px;">
+                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link" href="#">{{user.username | capfirst}}</a>
                             </li>
+
+                            {% elif user.is_authenticated and user.is_farmer %}
+                            <li class="nav-item">
+                                <img src="{% static 'images/check.png' %}" alt="Login Icon" class="login-icon" style="width: 25px; height: 30px;margin-top: 5px;">
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">{{user.username | capfirst}}</a>
+                            </li>
+                            
                             {% else %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'login' %}">Login</a>
