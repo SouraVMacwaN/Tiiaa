@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block content %}
+
+{% if success %}
+<div id="success-alert" class="alert alert-success" role="alert">
+    New Item Added in Inventory created successfully.
+</div>
+{% else %}
+
+    <div class="card" >
+        <h5 class="card-header">Add New Item in Inventory</h5>
+        
+        <div class="card-body">
+            
+            <form action="{% url 'additems' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    {% comment %} try  {% endcomment %}
+                    <div class="form-group">
+                        {{product_form | crispy }}
+
+                    {% comment %} try {% endcomment %}
+
+
+                    {% comment %} <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" name = "title" id="title" >
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="desc" class="form-label">Description</label>
+                        <textarea class="form-control" id="desc" rows="3"></textarea>
+                    </div> {% endcomment %}
+                </div>
+                <button type="submit" class="btn btn-primary">SAVE</button>
+                <button type="reset" class="btn btn-danger">CLEAR</button>
+
+            </form>
+        </div>
+
+       
+      
+        
+    </div>
+
+
+{% endif %}
+{% endblock %}

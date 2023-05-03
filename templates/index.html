@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Dashboard {% endblock %}
+{% block content %}
+<h4 class="mb-4">Dashboard</h4>
+
+<div class="table-responsive-md bg-light">
+  <table class="table table-bordered table-striped mb-4 bg-light">
+    <thead>
+      <tr>
+        <th><i class="fas fa-shopping-cart"></i> Auctions</th>
+        <th><i class="fas fa-hammer"></i> Bids</th>
+        <th><i class="fas fa-shopping-cart"></i> Categories</th>
+        <th><i class="fas fa-users"></i> Users</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ auctions_count }}</td>
+        <td>{{ bids_count }}</td>
+        <td>{{ categories_count }}</td>
+        <td>{{ users_count }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+    <div class="card-header">Header</div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <div class="table-responsive">
+          <table class=" table table-hover table-color">
+            <thead>
+              <tr>
+                <th scope='col'>Title</th>
+                <th scope='col'>Category</th>
+                <th scope='col'>Date Created</th>
+                <th scope='col'>Start Bid</th>
+                <th scope='col'>Current Bid</th>
+                <th scope='col'>Buyer</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for auction in pages %}
+              <tr>
+                <td>{{ auction.title }}</td>
+                <td>{{ auction.category }}</td>
+                <td>{{ auction.date_created|timesince}}</td>
+                <td>{{ auction.starting_bid }}</td>
+                <td>{{ auction.current_bid }}</td>
+                <td>{{ auction.buyer }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+          {% if pages.has_other_pages %}
+          <div class="d-flex justify-content-center">
+            <ul class="pagination">
+              {% if pages.has_previous %}
+              <li class="page-item">
+                <a href="?page={{ pages.previous_page_number }}" class="page-link">&laquo;</a>
+              </li>
+              {% else %}
+              <li class="page-item">
+                <a href="" class="page-link disabled">&laquo;</a>
+              </li>
+              {% endif %}
+              
+              {% for i in pages.paginator.page_range %}
+              {% if pages.number == i %}
+              <li class="page-item">
+                <a href="" class="page-link active">{{i}}</a>
+              </li>
+              {% else %}
+              <li class="page-item">
+                <a href="?page={{ i }}" class="page-link">{{i}}</a>
+              </li>
+              {% endif %}
+              {% endfor %}
+              {% if pages.has_next %}
+              <li class="page-item">
+                <a href="?page={{ pages.next_page_number }}" class="page-link">&raquo;</a>
+              </li>
+              {% else %}
+              <li class="page-item">
+                <a href="" class="page-link disabled">&raquo;</a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+          {% endif %}
+    </div>
+</div>
+{% endblock %}
