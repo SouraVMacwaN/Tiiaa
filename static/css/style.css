@@ -476,3 +476,15 @@ a.article:hover {
     height: 20%;
     width: 20%;
 }
+
+#addnewitemheaderid{
+    color: #393E46;
+    background-color: #393E46;
+}
+
+#addnewitembodyid{
+    background-color: #A4907C;
+}
+
+#hint_id_username{
+text-decoration-color: #ddd;}

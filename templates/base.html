@@ -69,10 +69,10 @@ var csrftoken = getToken('csrftoken')
 
             <ul class="list-unstyled components text-dark ">
                 <li>
-                    <a href="{% url  'index' %}"style="color: #000;" ><i class="far fa-chart-area  "></i> Dashboard</a>
+                    <a href="{% url  'index' %}"style="color: #000;" ><i class="far fa-chart-area  "></i> Dashboard1</a>
                 </li>
                 <li>
-                    <a href="{% url 'additems' %}"><i class="far fa-chart-article"></i> Add Items</a>
+                    <a href="{% url 'additems' %}"><i class="far fa-plus text-dark"></i> Add Items</a>
                 </li>
                 <li>
                     <a href="{% url 'active' %}" style="color: #000;"><i class="fa fa-list text-dark"></i> Ongoing Bidding</a>
@@ -191,7 +191,7 @@ var csrftoken = getToken('csrftoken')
             <nav class="navbar navbar-expand-lg navbar-light ">
                 <div class="container-fluid">
     
-                    <button type="button" id="sidebarCollapse" class="btn btn-dark">
+                    <button type="button" id="sidebarCollapse" class="btn btn-dark b">
                         <i class="fas fa-align-left"></i>
                         <span>Toggle Sidebar</span>
                     </button>
@@ -213,21 +213,25 @@ var csrftoken = getToken('csrftoken')
 
                             {% if user.is_authenticated and not user.is_farmer %}
                             <li class="nav-item">
-                                <img src="{% static 'images/cart.png' %}" alt="Login Icon" class="login-icon" style="width: 25px; height: 30px;margin-top: 5px;">
+                                <a class="nav-link" href="#">{{user.username | capfirst}}</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="#">{{user.username | capfirst}}</a>
+                                <img src="{% static 'images/customer.png' %}" alt="Login Icon" class="login-icon" style="width: 25px; height: 30px;margin-top: 5px;">
                             </li>
+
+                            
 
                             {% elif user.is_authenticated and user.is_farmer %}
                             <li class="nav-item">
-                                <img src="{% static 'images/check.png' %}" alt="Login Icon" class="login-icon" style="width: 25px; height: 30px;margin-top: 5px;">
+                                <a class="nav-link" href="#">{{user.username | capfirst}}</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="#">{{user.username | capfirst}}</a>
+                                <img src="{% static 'images/farmer.png' %}" alt="Login Icon" class="login-icon" style="width: 25px; height: 30px;margin-top: 5px;">
                             </li>
+
+                            
                             
                             {% else %}
                             <li class="nav-item">

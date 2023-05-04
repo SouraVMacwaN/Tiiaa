@@ -13,8 +13,8 @@
 {% else %}
 
     <div class="card" >
-        <h5 class="card-header">Add New Item in Inventory</h5>
-        <div class="card-body">
+        <h5 class="card-header text-light" id="addnewitemheaderid">Add New Item in Inventory</h5>
+        <div class="card-body" id="addnewitembodyid">
 
             <form action="{% url 'additems' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
